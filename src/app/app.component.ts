@@ -6,8 +6,20 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
+  // template:`
+  // <h1> Hola mundo </h1>
+  // {{ title }}
+  // {{ city }}
+  // `,
   styleUrl: './app.component.css'
+  // styles:`
+  // h1{
+  //   color: pink;
+  // }
+  // `,
 })
 export class AppComponent {
-  title = 'Angular17';
+  title: string = 'Angular17';
+  city: string = "Casablanca";
+
 }
