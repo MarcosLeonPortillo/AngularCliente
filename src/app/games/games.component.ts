@@ -1,38 +1,43 @@
-import { Component, input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-games',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   template: `
-    <p>
-      games works!
-    </p>
-    <p> Los juegos favoritos de {{ nombreUsuario }} son estos: </p>
-    <ul> 
-      @for (game of games; track game.id){
-        <li> {{ game.name }} </li>
-      }
+    <h3>Los juegos favoritos de {{ username }}</h3>
+    <ul>
+      <li>
+        @for (game of games; track game.id) {
+          <li (click)="fav(game.name)">{{ game.name }}</li>
+        }
+      </li>
     </ul>
   `,
-  styleUrl: './games.component.css'
+  styles: ``
 })
 export class GamesComponent {
-  @input() nombreUsuario: string = '';
-  games= [
+  @Input() username = '';
+  @Output() addFavouriteEvent = new EventEmitter<string>();
+
+
+  fav(gameName: string){
+    this.addFavouriteEvent.emit(gameName);
+  }
+  
+  games = [
     {
-id: 1, 
-name: "Alone in the dark",
-},
-
-{
-  id: 2, 
-  name: "Need for speed 3",
-  },
-
-  {
-    id: 3, 
-    name: "Alone in the dark",
+      id: 1,
+      name: 'Uncharted 4',
     },
-]
+    {
+      id: 2,
+      name: 'Horizon Zero Dawn',
+    },
+    {
+      id: 3,
+      name: 'Bloodborne',
+    }
+  ]
 }

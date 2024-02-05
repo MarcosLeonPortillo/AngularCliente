@@ -1,15 +1,21 @@
 <section>
-<p>user works!</p>
+    @if (isLoggedIn){
+        <p>Bienvenido, {{ username }}</p>
+        <img (click)="greet()" alt="photo" src="https://avatars.githubusercontent.com/u/131361214?v=4" />
+    } @else {
+        <p>¡Inicia sesión!</p>   
+        <button (click)="isLoggedIn = true">Log In</button> 
+    }
 
-@if (estaLogado){
-    <p> Bienvenido, {{ username }} </p>
-    <img 
-    (click)="saludar()"
-    src="https://github.com/juanpedrobernal.png">
-} @else {
-    <p> Inicia sesión </p>
-    <input (click)="cambiarEstado()"  type="button" value="iniciar sesión">
-}
-<app-games nombreUsuario={{ username }}></app-games>
-(comunicadorEventHijoAPdre)="getFavourite($event)"
+    <app-games 
+      (addFavouriteEvent)="getFavourite($event)"
+      username="{{ username }}"></app-games>
+
+      @if (favGame != ''){
+        @if (isLoggedIn){
+          <p>Tu juego favorito es {{ favGame }}</p>
+        } @else {
+            <p>Inicia sesión para ver tu juego favorito</p>    
+        }
+      }
 </section>

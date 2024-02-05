@@ -1,21 +1,23 @@
 import { Component } from '@angular/core';
+import { GamesComponent } from '../games/games.component';
 
 @Component({
-  selector: 'app-games',
+  selector: 'app-user',
   standalone: true,
-  imports: [],
+  imports: [GamesComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  username: string = "Marcos";
-  estaLogado: boolean = false;
+  username = 'Sergio';
+  isLoggedIn = false; // <-- esto está funcionando como un estado
+  favGame = '';
 
-  saludar (): void {
-    alert ("Hola, " + this.username);
+  getFavourite(gameName: string){
+    this.favGame = gameName;
   }
 
-  cambiarEstado(): void{
-    this.estaLogado =! this.estaLogado;
+  greet() {
+    alert("Hola "+this.username+"!!!")
   }
 }
